@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="21a7f1af1df344b7868c5b82f5c9c6c9" Name="Diagram1">
+        <EntityTypeShape EntityType="SaleManagementSystemModel.Customer" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.Delivery" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.Employee" Width="1.5" PointX="3.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.Item" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.MenuItem" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.PickUp" Width="1.5" PointX="11" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.Property" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.Purchase" Width="1.5" PointX="11" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.Sale" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleManagementSystemModel.Supplier" Width="1.5" PointX="8.75" PointY="13.625" IsExpanded="true" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__Sale__CustomerId__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__Delivery__SaleId__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__PickUp__Employee__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__Sale__EmployeeId__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__MenuItem__ItemId__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__Property__ItemId__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__Sale__ItemId__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__PickUp__Supplier__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleManagementSystemModel.FK__Purchase__Suppli__5FB337D6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,6 @@
+D:\ASPNET\SaleManagementSystem\SaleManagementSystem.Common\obj\Debug\SaleManagementSystem.Common.csprojAssemblyReference.cache
+D:\ASPNET\SaleManagementSystem\SaleManagementSystem.Common\obj\Debug\SaleManagementSystem.Common.csproj.CoreCompileInputs.cache
+D:\ASPNET\SaleManagementSystem\SaleManagementSystem.Common\bin\Debug\SaleManagementSystem.Common.dll
+D:\ASPNET\SaleManagementSystem\SaleManagementSystem.Common\bin\Debug\SaleManagementSystem.Common.pdb
+D:\ASPNET\SaleManagementSystem\SaleManagementSystem.Common\obj\Debug\SaleManagementSystem.Common.dll
+D:\ASPNET\SaleManagementSystem\SaleManagementSystem.Common\obj\Debug\SaleManagementSystem.Common.pdb

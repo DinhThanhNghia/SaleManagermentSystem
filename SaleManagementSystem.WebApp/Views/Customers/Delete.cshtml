@@ -1,0 +1,24 @@
+﻿@model SaleManagementSystem.Model.DAL.Customer
+
+@{
+    Layout = null;
+}
+<div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center delete">
+                <h4 class="modal-title mt-2 mb-2" id="deleteModal">Are you sure you want to delete this?</h4>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-actions no-color text-center">
+                        <input type="submit" value="Yes" class="btn btn-default" />
+                        <button type="button" class="btn btn-light" style=" border: 0.5px solid #a8a9ad;" data-dismiss="modal">No</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

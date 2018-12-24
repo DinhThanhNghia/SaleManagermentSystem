@@ -1,0 +1,131 @@
+﻿@model SaleManagementSystem.Model.DAL.Employee
+
+@{
+    Layout = "~/Views/Shared/_LayoutForModal.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="MyModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Detail Employees</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Name" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row col-md-6">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Phone" } })
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row col-md-6">
+                                @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Position, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Position" } })
+                                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                @Html.LabelFor(model => model.JoinDate, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.JoinDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Select a date" } })
+                                    @Html.ValidationMessageFor(model => model.JoinDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row col-md-6">
+                                @Html.LabelFor(model => model.LeftDate, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.LeftDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Select a date" } })
+                                    @Html.ValidationMessageFor(model => model.LeftDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group row col-md-6">
+                                @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Salary", type = "number" } })
+                                    @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div><!-- /.modal-body -->
+                <div class="modal-footer">
+                    <div class="form-actions no-color text-center">
+                        <input type="submit" value="Save" class="btn btn-default" id="save" />
+                        <button type="button" class="btn btn-light" style=" border: 0.5px solid #a8a9ad;" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div><!-- /.modal-footer -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#JoinDate').datepicker({
+                todayBtn: "linked",
+                todayHighlight: true,
+                closeText: 'Closed',
+                orientation: "left",
+                format: 'mm/dd/yyyy',
+                autoclose: true,
+            }).on('changeDate', function (selected) {
+                var startDate = new Date(selected.date.valueOf());
+                $('#LeftDate').datepicker('setStartDate', startDate);
+            }).on('clearDate', function (selected) {
+                $('#LeftDate').datepicker('setStartDate', null);
+            });
+
+            $('#LeftDate').datepicker({
+                todayBtn: "linked",
+                closeText: 'Closed',
+                todayHighlight: true,
+                orientation: "left",
+                format: 'mm/dd/yyyy',
+                autoclose: true,
+            }).on('changeDate', function (selected) {
+                var endDate = new Date(selected.date.valueOf());
+                $('#JoinDate').datepicker('setEndDate', endDate);
+            }).on('clearDate', function (selected) {
+                $('#JoinDate').datepicker('setEndDate', null);
+            });
+
+        });
+    </script>
+}

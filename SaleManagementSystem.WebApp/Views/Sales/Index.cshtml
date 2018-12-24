@@ -1,0 +1,118 @@
+﻿@model IEnumerable<SaleManagementSystem.Model.DAL.Sale>
+
+@{
+    ViewBag.Title = "Sales Listing";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Customer:</label>
+                @Html.DropDownList("customerId", null, "Select a Customer", htmlAttributes: new { @class = "form-control col-md-8" })
+            </div>
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Employee:</label>
+                @Html.DropDownList("employeeId", null, "Select a Customer", htmlAttributes: new { @class = "form-control col-md-8" })
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Sale Code:</label>
+                @Html.TextBox("searchCode", null, htmlAttributes: new { @class = "form-control col-md-8", @placeholder = "Enter Sale Code" })
+            </div>
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Item Name:</label>
+                @Html.TextBox("searchItemName", null, htmlAttributes: new { @class = "form-control col-md-8", @placeholder = "Enter Item Name" })
+            </div>
+        </div>
+    </div>
+
+    <p>
+        <button type="submit" class="btn btn-default mr-2"><i class="fa fa-search"></i> Search</button>
+        <a class="btn btn-default dialog-link" href="@Url.Action("Create")"><i class="fas fa-plus"></i> Add new</a>
+    </p>
+}
+
+<div class="table-responsive">
+    <table class="table table table-bordered table-striped table-hover">
+        <tr style="background: #025215;" class="text-light">
+            <th>
+                @Html.DisplayNameFor(model => model.SaleCode)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.SaleCodeSortParm, customerId = ViewBag.Customer, employeeId = ViewBag.Employee, searchCode = ViewBag.Code, searchItemName = ViewBag.Item })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerId)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.CustomerSortParm, customerId = ViewBag.Customer, employeeId = ViewBag.Employee, searchCode = ViewBag.Code, searchItemName = ViewBag.Item })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.EmployeeSortParm, customerId = ViewBag.Customer, employeeId = ViewBag.Employee, searchCode = ViewBag.Code, searchItemName = ViewBag.Item })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemId)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.ItemSortParm, customerId = ViewBag.Customer, employeeId = ViewBag.Employee, searchCode = ViewBag.Code, searchItemName = ViewBag.Item })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.PriceSortParm, customerId = ViewBag.Customer, employeeId = ViewBag.Employee, searchCode = ViewBag.Code, searchItemName = ViewBag.Item })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.QuantitySortParm, customerId = ViewBag.Customer, employeeId = ViewBag.Employee, searchCode = ViewBag.Code, searchItemName = ViewBag.Item })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+            <th class="text-center">Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td class="text-center">
+                    <a class="text-default dialog-link" href="@Url.Action("Edit", new { id = item.Id })"><i class="fas fa-edit"></i></a>
+                    <a class="dialog-link text-danger ml-1" data-toggle="tooltip" data-placement="bottom" title="Delete" href="@Url.Action("Delete", new { id = item.Id })">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+    @if (Model.Count() <= 0)
+    {
+        <div class="text-center">No data to display</div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,83 @@
+﻿@model SaleManagementSystem.Model.DAL.Property
+
+@{
+    Layout = "~/Views/Shared/_LayoutForModal.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="MyModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Detail Properties</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="form-group col-md-6 row">
+                                @Html.LabelFor(model => model.ItemId, "Item Name", htmlAttributes: new { @class = "control-label col-md-4 text-right mt-2" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("ItemId", null, "Select an Item" ,htmlAttributes: new { @class = "form-control", required = "required", title = "Item is requried" })
+                                    @Html.ValidationMessageFor(model => model.ItemId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 row">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4 text-right mt-2" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Description" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6 row">
+                                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-4 text-right mt-2" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Status" } })
+                                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 row">
+                                @Html.LabelFor(model => model.OwnedDate, htmlAttributes: new { @class = "control-label col-md-4 text-right mt-2" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.OwnedDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Select a date" } })
+                                    @Html.ValidationMessageFor(model => model.OwnedDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /.modal-body -->
+                <div class="modal-footer">
+                    <div class="form-actions no-color text-center">
+                        <input type="submit" value="Save" class="btn btn-default" id="save" />
+                        <button type="button" class="btn btn-light" style=" border: 0.5px solid #a8a9ad;" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div><!-- /.modal-footer -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#OwnedDate').datepicker({
+                todayBtn: "linked",
+                todayHighlight: true,
+                orientation: "left",
+                format: 'mm/dd/yyyy',
+                autoclose: true
+            });
+        });
+    </script>
+}

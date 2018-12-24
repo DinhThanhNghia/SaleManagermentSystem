@@ -1,0 +1,144 @@
+﻿@model IEnumerable<SaleManagementSystem.Model.DAL.MenuItem>
+
+@{
+    ViewBag.Title = "Menu Items Listing";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Item Name:</label>
+                @Html.DropDownList("itemId", null, "Select an Item", htmlAttributes: new { @class = "form-control col-md-8" })
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Amount:</label>
+                @Html.TextBox("min", null, htmlAttributes: new { @class = "form-control col-md-8", @placeholder = "Enter Min", type = "number", step = "0.01" })
+            </div>
+            <div class="form-group col-md-6 row">
+                @Html.TextBox("max", null, htmlAttributes: new { @class = "form-control col-md-8", @placeholder = "Enter Max", type = "number", step = "0.01" })
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Created Date:</label>
+                @Html.TextBox("fromdate", null, htmlAttributes: new { @id = "CreateDate", @class = "form-control col-md-8", @placeholder = "Select a date" })
+            </div>
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Last Used Date:</label>
+                @Html.TextBox("todate", null, htmlAttributes: new { @id = "LastUsedDate", @class = "form-control col-md-8", @placeholder = "Select a date" })
+            </div>
+        </div>
+    </div>
+
+    <p>
+        <button type="submit" class="btn btn-default mr-2"><i class="fa fa-search"></i> Search</button>
+        <a class="btn btn-default dialog-link" href="@Url.Action("Create")"><i class="fas fa-plus"></i> Add new</a>
+    </p>
+}
+
+<div class="table-responsive">
+    <table class="table table table-bordered table-striped table-hover">
+        <tr style="background: #025215;" class="text-light">
+            <th>
+                @Html.DisplayNameFor(model => model.ItemId)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.NameSortParm, itemId = ViewBag.ItemName, fromdate = ViewBag.CreateDate, todate = ViewBag.LastUseDate, min = ViewBag.MinAmount, max = ViewBag.MaxAmount })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item.Unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item.Amount)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.AmountSortParm, itemId = ViewBag.ItemName, fromdate = ViewBag.CreateDate, todate = ViewBag.LastUseDate, min = ViewBag.MinAmount, max = ViewBag.MaxAmount })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.CreateDateSortParm, itemId = ViewBag.ItemName, fromdate = ViewBag.CreateDate, todate = ViewBag.LastUseDate, min = ViewBag.MinAmount, max = ViewBag.MaxAmount })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUsedDate)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.LastUseDateSortParm, itemId = ViewBag.ItemName, fromdate = ViewBag.CreateDate, todate = ViewBag.LastUseDate, min = ViewBag.MinAmount, max = ViewBag.MaxAmount })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.RatingSortParm, itemId = ViewBag.ItemName, fromdate = ViewBag.CreateDate, todate = ViewBag.LastUseDate, min = ViewBag.MinAmount, max = ViewBag.MaxAmount })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th class="text-center">Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUsedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td class="text-center">
+                    <a class="text-default dialog-link" href="@Url.Action("Edit", new { id = item.Id })"><i class="fas fa-edit"></i></a>
+                    <a class="dialog-link text-danger ml-1" data-toggle="tooltip" data-placement="bottom" title="Delete" href="@Url.Action("Delete", new { id = item.Id })">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+    @if (Model.Count() <= 0)
+    {
+        <div class="text-center">No data to display</div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $('#CreateDate').datepicker({
+                todayBtn: "linked",
+                todayHighlight: true,
+                closeText: 'Closed',
+                orientation: "left",
+                format: 'mm/dd/yyyy',
+                autoclose: true,
+            }).on('changeDate', function (selected) {
+                var startDate = new Date(selected.date.valueOf());
+                $('#LastUsedDate').datepicker('setStartDate', startDate);
+            }).on('clearDate', function (selected) {
+                $('#LastUsedDate').datepicker('setStartDate', null);
+            });
+
+            $('#LastUsedDate').datepicker({
+                todayBtn: "linked",
+                closeText: 'Closed',
+                todayHighlight: true,
+                orientation: "left",
+                format: 'mm/dd/yyyy',
+                autoclose: true,
+            }).on('changeDate', function (selected) {
+                var endDate = new Date(selected.date.valueOf());
+                $('#LastUsedDate').datepicker('setEndDate', endDate);
+            }).on('clearDate', function (selected) {
+                $('#LastUsedDate').datepicker('setEndDate', null);
+            });
+
+        });
+    </script>
+}

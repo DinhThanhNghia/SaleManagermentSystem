@@ -1,0 +1,95 @@
+﻿@model SaleManagementSystem.Model.DAL.Item
+
+@{
+    Layout = "~/Views/Shared/_LayoutForModal.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="MyModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Detail Items</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="row">
+                            <div class="form-group col-md-6 row">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Name" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 row">
+                                @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Unit" } })
+                                    @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6 row">
+                                @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Amount", type = "number", step = "0.01" } })
+                                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6 row">
+                                @Html.LabelFor(model => model.DateExpired, htmlAttributes: new { @class = "control-label col-md-4 mt-2 text-right" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.DateExpired, new { htmlAttributes = new { @class = "form-control", @placeholder = "Select a date" } })
+                                    @Html.ValidationMessageFor(model => model.DateExpired, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        @Html.HiddenFor(model => model.IsDeleted)
+                        @Html.HiddenFor(model => model.InsAt)
+                        @Html.HiddenFor(mode => Model.InsBy)
+
+                    </div>
+                </div><!-- /.modal-body -->
+                <div class="modal-footer">
+                    <div class="form-actions no-color text-center">
+                        <input type="submit" value="Save" class="btn btn-default" id="save" />
+                        <button type="button" class="btn btn-light" style=" border: 0.5px solid #a8a9ad;" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div><!-- /.modal-footer -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            var date = new Date();
+            date.setDate(date.getDate());
+
+            $('#DateExpired').datepicker({
+                startDate: date,
+                todayBtn: "linked",
+                closeText: 'Closed',
+                todayHighlight: true,
+                orientation: "left",
+                format: 'mm/dd/yyyy',
+                autoclose: true,
+            });
+        });
+    </script>
+}
+
+

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SaleManagementSystem.Model.DAL.Customer>
+
+@{
+    ViewBag.Title = "Customers Listing";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="row col-md-12">
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Name:</label>
+                @Html.TextBox("name", null, htmlAttributes: new { @class = "form-control col-md-8  ", @placeholder = "Enter Name" })
+            </div>
+            <div class="form-group col-md-6 row">
+                <label class="col-md-3 mt-2">Phone No.:</label>
+                @Html.TextBox("phone", null, htmlAttributes: new { @class = "form-control col-md-8", @placeholder = "Enter Phone No." })
+            </div>
+        </div>
+    </div>
+    <p>
+        <button type="submit" class="btn btn-default mr-2"><i class="fa fa-search"></i> Search</button>
+        <a class="btn btn-default dialog-link" href="@Url.Action("Create")"><i class="fas fa-plus"></i> Add new</a>
+    </p>
+
+}
+<div class="table-responsive">
+    <table class="table table table-bordered table-striped table-hover">
+        <tr style="background: #025215;" class="text-light">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.NameSortParm, name = ViewBag.Name, phone = ViewBag.Phone })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JoinDate)
+                <a class="ml-2 text-light" href="@Url.Action("Index", new { sortOrder = ViewBag.DateSortParm, name = ViewBag.Name, phone = ViewBag.Phone })"><i class="fas fa-sort"></i></a>
+            </th>
+            <th class="text-center">Action</th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JoinDate)
+                </td>
+                <td class="text-center">
+                    <a class="text-default dialog-link" href="@Url.Action("Edit", new { id = item.Id })"><i class="fas fa-edit"></i></a>
+                    <a class="dialog-link text-danger ml-1" data-toggle="tooltip" data-placement="bottom" title="Delete" href="@Url.Action("Delete", new { id = item.Id })">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    @if (Model.Count() <= 0)
+    {
+        <div class="text-center">No data to display</div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
